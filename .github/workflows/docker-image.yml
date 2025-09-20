@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  build-war:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -23,12 +23,12 @@ jobs:
           path: staging
 
 
-  docker:
+  docker-image:
     runs-on: ubuntu-latest
-    needs: build   # Run only if Maven build succeeds
+    needs: build-war
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Build the Docker image
-        run: docker build gateway --file gateway/Dockerfile --tag gateway:$(date +%s)
+        run: docker build gateway --file Dockerfile --tag gateway:$(date +%s)
