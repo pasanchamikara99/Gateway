@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Maven and Docker CI
 
 on:
   push:
@@ -21,14 +21,15 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn clean install -f gateway/pom.xml
+        working-directory: gateway
+        run: mvn clean install
 
   docker:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build   # Run only if Maven build succeeds
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag gateway:$(date +%s)
+        run: docker build gateway --file gateway/Dockerfile --tag gateway:$(date +%s)
