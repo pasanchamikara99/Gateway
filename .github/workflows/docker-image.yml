@@ -38,7 +38,7 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.VERSION }} .
-          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.VERSION }} ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.VERSION }}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gateway:${{ env.VERSION }} .
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/gateway:${{ env.VERSION }} ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/gateway:${{ env.VERSION }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/gateway:latest
